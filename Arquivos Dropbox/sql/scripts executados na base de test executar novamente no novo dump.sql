@@ -820,6 +820,14 @@ ALTER TABLE adempiere.t_trialbalance
     DEFERRABLE
     INITIALLY DEFERRED;
 	
+/* alterada todos os nomes de tabelas LBR para lbr_nometabela_old para manter compatibilidade
+com a nova versão do IDempiereLBR */ 
+alter table LBR_ApuracaoICMS rename to LBR_ApuracaoICMS_old;
+alter table LBR_ApuracaoICMSLine rename to LBR_ApuracaoICMSLine_old;
+alter table LBR_ApuracaoIPI rename to LBR_ApuracaoIPI_old;
+alter table LBR_ApuracaoIPILine rename to LBR_ApuracaoIPILine_old;
+alter table LBR_AverageCost rename to LBR_AverageCost_old;
+alter table LBR_AverageCostLine rename to LBR_AverageCostLine_old;
 alter table LBR_Bank rename to LBR_Bank_old;
 alter table LBR_BankInfo rename to LBR_BankInfo_old;
 alter table LBR_Boleto rename to LBR_Boleto_old;
