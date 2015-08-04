@@ -819,7 +819,7 @@ ALTER TABLE adempiere.t_trialbalance
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED;
-	
+
 /* alterada todos os nomes de tabelas LBR para lbr_nometabela_old para manter compatibilidade
 com a nova versão do IDempiereLBR */ 
 alter table LBR_ApuracaoICMS rename to LBR_ApuracaoICMS_old;
@@ -878,3 +878,133 @@ alter table LBR_TaxIncludedList rename to LBR_TaxIncludedList_old;
 alter table LBR_TaxLine rename to LBR_TaxLine_old;
 alter table LBR_TaxName rename to LBR_TaxName_old;
 alter table LBR_TaxStatus rename to LBR_TaxStatus_old;
+
+/* *************************************************************************
+	processo de exclusao de dados das tabelas 'LBR_*'
+	ad_menu
+	ad_tab
+	ad_window
+	ad_Field
+	ad_element
+	ad_column
+	ad_table
+	ad_process
+	ad_rule
+	ad_form
+	ad_infocolumn
+************************************************************************** */
+delete from ad_menu where  entitytype = 'LBRA';
+delete from ad_Field where  entitytype = 'LBRA';
+delete from ad_tab where  entitytype = 'LBRA';
+delete from ad_ref_table e where e.entitytype = 'LBRA';
+
+delete from ad_field e where e.ad_column_id in 
+(select ad_column_id from ad_column e where e.entitytype = 'LBRA');
+
+delete from ad_field e where e.ad_column_id in 
+(select ad_column_id from ad_column e where e.ad_reference_value_id in 
+(select ad_reference_id from ad_reference e where e.entitytype = 'LBRA'));
+
+delete from ad_column e where e.ad_reference_value_id in 
+(select ad_reference_id from ad_reference e where e.entitytype = 'LBRA');
+
+delete from ad_reference e where e.entitytype = 'LBRA';
+delete from ad_ref_list e where e.entitytype = 'LBRA';
+delete from ad_pinstance a where a.ad_process_id in (
+select ad_process_id from ad_process where entitytype = 'LBRA');
+
+delete from ad_process where  entitytype = 'LBRA';
+
+delete from ad_tab e where e.ad_table_id in (
+select ad_table_id from ad_table a where a.entitytype = 'LBRA');
+
+delete from ad_recentitem e where e.ad_table_id in 
+(select ad_table_id from ad_table a where a.entitytype = 'LBRA');
+
+delete from ad_changelog a where a.ad_column_id in 
+(select ad_column_id from ad_Column where entitytype = 'LBRA');
+
+delete from ad_changelog a where a.ad_table_id in 
+(select ad_table_id from ad_table where entitytype = 'LBRA');
+
+delete from ad_preference e where e.ad_window_id in 
+(select ad_window_id from ad_window a where a.entitytype = 'LBRA');
+
+delete from ad_preference e where e.ad_process_id in 
+(select ad_process_id from ad_process a where a.entitytype = 'LBRA');
+
+delete from r_request e where e.ad_table_id in 
+(select ad_table_id from ad_table a where a.entitytype = 'LBRA');
+
+delete from ad_archive a where a.ad_table_id in 
+(select ad_table_id from ad_table a where a.entitytype = 'LBRA');
+
+delete from ad_attachment a where a.ad_table_id in 
+(select ad_table_id from ad_table a where a.entitytype = 'LBRA');
+
+-- object recreation
+ALTER TABLE adempiere.ad_printformat_trl
+  DROP CONSTRAINT adprintformat_trl RESTRICT;
+
+ALTER TABLE adempiere.ad_printformat_trl
+  ADD CONSTRAINT adprintformat_trl FOREIGN KEY (ad_printformat_id)
+    REFERENCES adempiere.ad_printformat(ad_printformat_id)
+    MATCH FULL
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION
+    DEFERRABLE
+    INITIALLY DEFERRED;
+    
+delete from ad_printformat e where e.ad_table_id in 
+(select ad_table_id from ad_table a where a.entitytype = 'LBRA');
+
+delete from ad_wf_activity e where e.ad_table_id in 
+(select ad_table_id from ad_table a where a.entitytype = 'LBRA');
+
+delete from ad_wf_eventaudit e where e.ad_table_id in 
+(select ad_table_id from ad_table a where a.entitytype = 'LBRA');
+
+delete from ad_wf_process e where e.ad_table_id in 
+(select ad_table_id from ad_table a where a.entitytype = 'LBRA');
+
+delete from ad_workflow e where e.ad_table_id in 
+(select ad_table_id from ad_table a where a.entitytype = 'LBRA');
+
+delete from ad_table a where a.ad_window_id in 
+(select ad_window_id from ad_window e where e.entitytype = 'LBRA');
+
+delete from ad_window where  entitytype = 'LBRA';
+delete from ad_table where  entitytype = 'LBRA';
+delete from ad_column where  entitytype = 'LBRA';
+
+delete from ad_field a where a.ad_column_id in 
+(select ad_column_id from ad_column a where a.ad_element_id in 
+(select ad_element_id from ad_element a where a.entitytype = 'LBRA'));
+
+delete from ad_column e where e.ad_element_id in 
+(select ad_element_id from ad_element a where a.entitytype = 'LBRA');
+
+delete from ad_process_para a where a.ad_element_id in (
+select ad_element_id from ad_element a where a.entitytype = 'LBRA');
+
+select  from ad_process_para a where a.entitytype = 'LBRA';
+delete from ad_element where  entitytype = 'LBRA';
+delete from ad_pinstance a where a.ad_process_id in (
+select ad_process_id from ad_process where entitytype = 'LBRA');
+delete from ad_process where  entitytype = 'LBRA';
+delete from ad_rule where  entitytype = 'LBRA';
+-- object recreation
+ALTER TABLE adempiere.ad_form_trl
+  DROP CONSTRAINT adform_adformtrl RESTRICT;
+
+ALTER TABLE adempiere.ad_form_trl
+  ADD CONSTRAINT adform_adformtrl FOREIGN KEY (ad_form_id)
+    REFERENCES adempiere.ad_form(ad_form_id)
+    MATCH FULL
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION
+    DEFERRABLE
+    INITIALLY DEFERRED;
+
+delete from ad_form a where  a.entitytype = 'LBRA';
+delete from ad_infocolumn where  entitytype = 'LBRA';
