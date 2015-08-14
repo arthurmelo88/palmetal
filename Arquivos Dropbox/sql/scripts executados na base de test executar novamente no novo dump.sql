@@ -893,56 +893,57 @@ alter table LBR_TaxStatus rename to LBR_TaxStatus_old;
 	ad_form
 	ad_infocolumn
 ************************************************************************** */
-delete from ad_menu where  entitytype = 'LBRA';
-delete from ad_Field where  entitytype = 'LBRA';
-delete from ad_tab where  entitytype = 'LBRA';
-delete from ad_ref_table e where e.entitytype = 'LBRA';
+delete from ad_menu where  entitytype = 'LBRA'; --menu
+delete from ad_Field where  entitytype = 'LBRA'; -- field 
+delete from ad_tab where  entitytype = 'LBRA'; -- tab
+delete from ad_ref_table e where e.entitytype = 'LBRA'; -- ref table
 
 delete from ad_field e where e.ad_column_id in 
-(select ad_column_id from ad_column e where e.entitytype = 'LBRA');
+(select ad_column_id from ad_column e where e.entitytype = 'LBRA'); -- field vinculados com column id
 
 delete from ad_field e where e.ad_column_id in 
 (select ad_column_id from ad_column e where e.ad_reference_value_id in 
-(select ad_reference_id from ad_reference e where e.entitytype = 'LBRA'));
+(select ad_reference_id from ad_reference e where e.entitytype = 'LBRA')); -- field vinculados com reference id
 
 delete from ad_column e where e.ad_reference_value_id in 
-(select ad_reference_id from ad_reference e where e.entitytype = 'LBRA');
+(select ad_reference_id from ad_reference e where e.entitytype = 'LBRA'); -- columns vinculados com reference id
 
-delete from ad_reference e where e.entitytype = 'LBRA';
-delete from ad_ref_list e where e.entitytype = 'LBRA';
+delete from ad_reference e where e.entitytype = 'LBRA'; -- reference id
+delete from ad_ref_list e where e.entitytype = 'LBRA'; -- ref list
 delete from ad_pinstance a where a.ad_process_id in (
-select ad_process_id from ad_process where entitytype = 'LBRA');
+select ad_process_id from ad_process where entitytype = 'LBRA'); -- p instance id vinculados com process id
 
-delete from ad_process where  entitytype = 'LBRA';
+delete from ad_process where  entitytype = 'LBRA'; -- process id
 
 delete from ad_tab e where e.ad_table_id in (
-select ad_table_id from ad_table a where a.entitytype = 'LBRA');
+select ad_table_id from ad_table a where a.entitytype = 'LBRA'); -- tab
 
 delete from ad_recentitem e where e.ad_table_id in 
-(select ad_table_id from ad_table a where a.entitytype = 'LBRA');
+(select ad_table_id from ad_table a where a.entitytype = 'LBRA'); -- recent item vinculados com tabelas lbr
 
 delete from ad_changelog a where a.ad_column_id in 
-(select ad_column_id from ad_Column where entitytype = 'LBRA');
+(select ad_column_id from ad_Column where entitytype = 'LBRA'); --changelogs vinculados com column id lbr
 
 delete from ad_changelog a where a.ad_table_id in 
-(select ad_table_id from ad_table where entitytype = 'LBRA');
+(select ad_table_id from ad_table where entitytype = 'LBRA'); -- changelogs vinculados com tabelas lbr
 
 delete from ad_preference e where e.ad_window_id in 
-(select ad_window_id from ad_window a where a.entitytype = 'LBRA');
+(select ad_window_id from ad_window a where a.entitytype = 'LBRA'); -- preference id vinculados com janelas
 
 delete from ad_preference e where e.ad_process_id in 
-(select ad_process_id from ad_process a where a.entitytype = 'LBRA');
+(select ad_process_id from ad_process a where a.entitytype = 'LBRA'); -- preference vinculados com process id
 
 delete from r_request e where e.ad_table_id in 
-(select ad_table_id from ad_table a where a.entitytype = 'LBRA');
+(select ad_table_id from ad_table a where a.entitytype = 'LBRA'); -- requests vinculados com tabelas lbr 
 
 delete from ad_archive a where a.ad_table_id in 
-(select ad_table_id from ad_table a where a.entitytype = 'LBRA');
+(select ad_table_id from ad_table a where a.entitytype = 'LBRA'); -- archive vinculados com tabelas lbr
 
 delete from ad_attachment a where a.ad_table_id in 
-(select ad_table_id from ad_table a where a.entitytype = 'LBRA');
+(select ad_table_id from ad_table a where a.entitytype = 'LBRA'); -- attachements vinculados com tabelas lbr
 
 -- object recreation
+-- remove a constrain caso exista e cria uma nova com ON DELETE CASCADE para deletar as traducoes tambem
 ALTER TABLE adempiere.ad_printformat_trl
   DROP CONSTRAINT adprintformat_trl RESTRICT;
 
@@ -956,44 +957,45 @@ ALTER TABLE adempiere.ad_printformat_trl
     INITIALLY DEFERRED;
     
 delete from ad_printformat e where e.ad_table_id in 
-(select ad_table_id from ad_table a where a.entitytype = 'LBRA');
+(select ad_table_id from ad_table a where a.entitytype = 'LBRA'); -- delete printformat
 
 delete from ad_wf_activity e where e.ad_table_id in 
-(select ad_table_id from ad_table a where a.entitytype = 'LBRA');
+(select ad_table_id from ad_table a where a.entitytype = 'LBRA'); -- delete workflow activity 
 
 delete from ad_wf_eventaudit e where e.ad_table_id in 
-(select ad_table_id from ad_table a where a.entitytype = 'LBRA');
+(select ad_table_id from ad_table a where a.entitytype = 'LBRA'); -- delete workflow eventaudit
 
 delete from ad_wf_process e where e.ad_table_id in 
-(select ad_table_id from ad_table a where a.entitytype = 'LBRA');
+(select ad_table_id from ad_table a where a.entitytype = 'LBRA'); -- delete workflow process id
 
 delete from ad_workflow e where e.ad_table_id in 
-(select ad_table_id from ad_table a where a.entitytype = 'LBRA');
+(select ad_table_id from ad_table a where a.entitytype = 'LBRA'); -- delete workflows
 
 delete from ad_table a where a.ad_window_id in 
-(select ad_window_id from ad_window e where e.entitytype = 'LBRA');
+(select ad_window_id from ad_window e where e.entitytype = 'LBRA'); -- delete tables lbr
 
-delete from ad_window where  entitytype = 'LBRA';
-delete from ad_table where  entitytype = 'LBRA';
-delete from ad_column where  entitytype = 'LBRA';
+delete from ad_window where  entitytype = 'LBRA'; -- delete windows janelas lbr
+delete from ad_table where  entitytype = 'LBRA'; -- delete tabelas lbr 
+delete from ad_column where  entitytype = 'LBRA'; -- deleta colunas lbr
 
 delete from ad_field a where a.ad_column_id in 
 (select ad_column_id from ad_column a where a.ad_element_id in 
-(select ad_element_id from ad_element a where a.entitytype = 'LBRA'));
+(select ad_element_id from ad_element a where a.entitytype = 'LBRA')); -- deleta fields vinculados com elementos lbr
 
 delete from ad_column e where e.ad_element_id in 
-(select ad_element_id from ad_element a where a.entitytype = 'LBRA');
+(select ad_element_id from ad_element a where a.entitytype = 'LBRA'); -- deleta colunas vinculadas com elementos lbr
 
 delete from ad_process_para a where a.ad_element_id in (
-select ad_element_id from ad_element a where a.entitytype = 'LBRA');
+select ad_element_id from ad_element a where a.entitytype = 'LBRA'); -- deleta processos vinculados com elementos lbr
 
-select  from ad_process_para a where a.entitytype = 'LBRA';
-delete from ad_element where  entitytype = 'LBRA';
+select  from ad_process_para a where a.entitytype = 'LBRA'; -- deleta parametro de processos LBR
+delete from ad_element where  entitytype = 'LBRA'; -- deleta elementos LBR
 delete from ad_pinstance a where a.ad_process_id in (
-select ad_process_id from ad_process where entitytype = 'LBRA');
-delete from ad_process where  entitytype = 'LBRA';
-delete from ad_rule where  entitytype = 'LBRA';
+select ad_process_id from ad_process where entitytype = 'LBRA'); -- deleta pinstance id vinculados com processos lbr
+delete from ad_process where  entitytype = 'LBRA'; -- deleta processos lbr
+delete from ad_rule where  entitytype = 'LBRA'; -- deleta rules lbr
 -- object recreation
+-- dropa e recria constrain caso exista, cria ON DELETE CASCADE para traducoes de formularios.
 ALTER TABLE adempiere.ad_form_trl
   DROP CONSTRAINT adform_adformtrl RESTRICT;
 
@@ -1006,5 +1008,28 @@ ALTER TABLE adempiere.ad_form_trl
     DEFERRABLE
     INITIALLY DEFERRED;
 
-delete from ad_form a where  a.entitytype = 'LBRA';
-delete from ad_infocolumn where  entitytype = 'LBRA';
+delete from ad_form a where  a.entitytype = 'LBRA'; -- deleta formularios LBR
+delete from ad_infocolumn where  entitytype = 'LBRA'; -- deleta infocolumns LBR
+delete from ad_element where ad_element_id = 2000171; -- delete elemento que sobrou com nome LBR
+
+-- object recreation
+-- alterada constrain adfieldgroup_trl para ON DELETE CASCADE
+ALTER TABLE adempiere.ad_fieldgroup_trl
+  DROP CONSTRAINT adfieldgroup_trl RESTRICT;
+
+ALTER TABLE adempiere.ad_fieldgroup_trl
+  ADD CONSTRAINT adfieldgroup_trl FOREIGN KEY (ad_fieldgroup_id)
+    REFERENCES adempiere.ad_fieldgroup(ad_fieldgroup_id)
+    MATCH FULL
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION
+    DEFERRABLE
+    INITIALLY DEFERRED;
+	
+delete from ad_Fieldgroup e where e.entitytype = 'LBRA';
+delete from ad_message e where e.entitytype = 'LBRA';
+delete from ad_modelvalidator where entitytype = 'LBRA';
+delete from ad_sysconfig where entitytype = 'LBRA';
+delete from ad_val_rule where entitytype = 'LBRA';
+delete from ad_entitytype where ad_entitytype.entitytype = 'LBRA';
+DELETE FROM AD_REFERENCE WHERE AD_REFERENCE_ID = 1120031;
