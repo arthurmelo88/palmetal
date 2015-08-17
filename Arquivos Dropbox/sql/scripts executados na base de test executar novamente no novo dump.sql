@@ -946,7 +946,7 @@ delete from ad_attachment a where a.ad_table_id in
 -- remove a constrain caso exista e cria uma nova com ON DELETE CASCADE para deletar as traducoes tambem
 ALTER TABLE adempiere.ad_printformat_trl
   DROP CONSTRAINT adprintformat_trl RESTRICT;
-
+commit;
 ALTER TABLE adempiere.ad_printformat_trl
   ADD CONSTRAINT adprintformat_trl FOREIGN KEY (ad_printformat_id)
     REFERENCES adempiere.ad_printformat(ad_printformat_id)
@@ -955,7 +955,7 @@ ALTER TABLE adempiere.ad_printformat_trl
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED;
-    
+    commit;
 delete from ad_printformat e where e.ad_table_id in 
 (select ad_table_id from ad_table a where a.entitytype = 'LBRA'); -- delete printformat
 
@@ -998,7 +998,7 @@ delete from ad_rule where  entitytype = 'LBRA'; -- deleta rules lbr
 -- dropa e recria constrain caso exista, cria ON DELETE CASCADE para traducoes de formularios.
 ALTER TABLE adempiere.ad_form_trl
   DROP CONSTRAINT adform_adformtrl RESTRICT;
-
+commit;
 ALTER TABLE adempiere.ad_form_trl
   ADD CONSTRAINT adform_adformtrl FOREIGN KEY (ad_form_id)
     REFERENCES adempiere.ad_form(ad_form_id)
@@ -1007,7 +1007,7 @@ ALTER TABLE adempiere.ad_form_trl
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED;
-
+commit;
 delete from ad_form a where  a.entitytype = 'LBRA'; -- deleta formularios LBR
 delete from ad_infocolumn where  entitytype = 'LBRA'; -- deleta infocolumns LBR
 delete from ad_element where ad_element_id = 2000171; -- delete elemento que sobrou com nome LBR
@@ -1016,7 +1016,7 @@ delete from ad_element where ad_element_id = 2000171; -- delete elemento que sob
 -- alterada constrain adfieldgroup_trl para ON DELETE CASCADE
 ALTER TABLE adempiere.ad_fieldgroup_trl
   DROP CONSTRAINT adfieldgroup_trl RESTRICT;
-
+commit;
 ALTER TABLE adempiere.ad_fieldgroup_trl
   ADD CONSTRAINT adfieldgroup_trl FOREIGN KEY (ad_fieldgroup_id)
     REFERENCES adempiere.ad_fieldgroup(ad_fieldgroup_id)
@@ -1025,7 +1025,7 @@ ALTER TABLE adempiere.ad_fieldgroup_trl
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED;
-	
+	commit;
 delete from ad_Fieldgroup e where e.entitytype = 'LBRA';
 delete from ad_message e where e.entitytype = 'LBRA';
 delete from ad_modelvalidator where entitytype = 'LBRA';
