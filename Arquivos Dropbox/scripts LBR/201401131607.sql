@@ -11,6 +11,29 @@ UPDATE AD_Column SET FKConstraintName='LBRNCM_MProduct', FKConstraintType='N',Up
 ALTER TABLE M_Product ADD COLUMN LBR_NCM_ID NUMERIC(10) DEFAULT NULL 
 ;
 
+/* Data for the 'lbr_ncm' table  (Records 1 - 7) */
+
+INSERT INTO lbr_ncm ("lbr_ncm_id", "ad_org_id", "ad_client_id", "isactive", "created", "createdby", "updated", "updatedby", "value", "description", "lbr_tax_id", "lbr_hassubstitution")
+VALUES (2000000, 2000000, 2000000, E'Y', E'2012-06-25 16:14:06', 100, E'2013-07-09 11:17:21', 100, E'7222.40.90', E'Barras e perfis, de aço inoxidável.\nOutros', 2000820, E'N');
+
+INSERT INTO lbr_ncm ("lbr_ncm_id", "ad_org_id", "ad_client_id", "isactive", "created", "createdby", "updated", "updatedby", "value", "description", "lbr_tax_id", "lbr_hassubstitution")
+VALUES (2000002, 2000000, 2000000, E'Y', E'2013-06-24 09:58:03', 100, E'2013-06-24 09:58:13', 100, E'7309.00.90', E'Reservatórios, tonéis, cubas e recipientes semelhantes para quaisquer matérias (exceto gases comprimidos ou liquefeitos), de ferro fundido, ferro ou aço, de capacidade superior a 300 litros, sem dispositivos mecânicos ou térmicos... \nOutros', 2000821, E'N');
+
+INSERT INTO lbr_ncm ("lbr_ncm_id", "ad_org_id", "ad_client_id", "isactive", "created", "createdby", "updated", "updatedby", "value", "description", "lbr_tax_id", "lbr_hassubstitution")
+VALUES (2000003, 2000000, 2000000, E'Y', E'2013-06-24 09:59:01', 100, E'2013-06-24 09:59:09', 100, E'7219.14.00', E'Produtos laminados planos de aço inoxidável,\nde largura igual ou superior a 600mm.\nDe espessura inferior a 3mm', 2000822, E'N');
+
+INSERT INTO lbr_ncm ("lbr_ncm_id", "ad_org_id", "ad_client_id", "isactive", "created", "createdby", "updated", "updatedby", "value", "description", "lbr_tax_id", "lbr_hassubstitution")
+VALUES (2000004, 2000000, 2000000, E'Y', E'2013-06-24 10:18:20', 100, E'2013-06-24 10:18:29', 100, E'7220.20.90', E'Produtos laminados planos de aço inoxidável,\n de largura in-ferior a 600mm.\nOutros', 2000823, E'N');
+
+INSERT INTO lbr_ncm ("lbr_ncm_id", "ad_org_id", "ad_client_id", "isactive", "created", "createdby", "updated", "updatedby", "value", "description", "lbr_tax_id", "lbr_hassubstitution")
+VALUES (2000005, 2000000, 2000000, E'Y', E'2013-06-24 10:19:38', 100, E'2013-06-24 10:19:47', 100, E'7309.00.90 ', E'Reservatórios, tonéis, cubas e recipientes semelhantes para quaisquer matérias (exceto gases comprimidos ou liquefeitos), de ferro fundido, ferro ou aço, de capacidade superior\na 300 litros, sem dispositivos mecânicos ou térmicos, mesmo com...\nOutros', 2000824, E'N');
+
+INSERT INTO lbr_ncm ("lbr_ncm_id", "ad_org_id", "ad_client_id", "isactive", "created", "createdby", "updated", "updatedby", "value", "description", "lbr_tax_id", "lbr_hassubstitution")
+VALUES (2000006, 2000000, 2000000, E'Y', E'2013-06-24 10:20:54', 100, E'2013-06-24 10:21:02', 100, E'7310.10.90', E'Reservatórios, barris, tambores, latas, caixas e recipientes semelhantes para quaisquer matérias (exceto gases comprimidos ou liquefeitos), de ferro fundido, ferro ou aço, de\ncapacidade não superior a 300 litros, sem dispositivos mecânicos ou térm...\nOutr', 2000825, E'N');
+
+INSERT INTO lbr_ncm ("lbr_ncm_id", "ad_org_id", "ad_client_id", "isactive", "created", "createdby", "updated", "updatedby", "value", "description", "lbr_tax_id", "lbr_hassubstitution")
+VALUES (2000007, 2000000, 2000000, E'Y', E'2014-10-29 17:10:05', 100, E'2014-10-29 17:10:05', 100, E'7310.29.90', E'Reservatórios, barris, tambores, latas, caixas e recipientes semelhantes para quaisquer matérias (exceto gases comprimidos ou liquefeitos), de ferro fundido, ferro ou aço, de capacidade não superior a 300 l, sem dispositivos mecânicos ou térmicos, mesmo c', 2016403, E'N');
+
 -- 13/01/2014 15h9min36s BRST
 ALTER TABLE M_Product ADD CONSTRAINT LBRNCM_MProduct FOREIGN KEY (LBR_NCM_ID) REFERENCES lbr_ncm(lbr_ncm_id) DEFERRABLE INITIALLY DEFERRED
 ;

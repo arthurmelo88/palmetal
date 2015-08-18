@@ -34,115 +34,115 @@ or ad_client_id not in (select ad_client_id from ad_client)
 or ad_org_id not in ( select ad_org_id from ad_org)
 or included_tab_id not in (select ad_tab_id from ad_tab);
   
-ALTER TABLE adempiere.ad_attachmentnote
+ALTER TABLE  ad_attachmentnote
   ADD CONSTRAINT adattachment_note FOREIGN KEY (ad_attachment_id)
-    REFERENCES adempiere.ad_attachment(ad_attachment_id)
+    REFERENCES  ad_attachment(ad_attachment_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED;
 	
-CREATE UNIQUE INDEX ad_field_column ON adempiere.ad_field
+CREATE UNIQUE INDEX ad_field_column ON  ad_field
   USING btree (ad_tab_id, ad_column_id);	
 	
 -- object recreation
-ALTER TABLE adempiere.ad_field
+ALTER TABLE  ad_field
   DROP CONSTRAINT ad_column_field RESTRICT;
 
-ALTER TABLE adempiere.ad_field
+ALTER TABLE  ad_field
   ADD CONSTRAINT ad_column_field FOREIGN KEY (ad_column_id)
-    REFERENCES adempiere.ad_column(ad_column_id)
+    REFERENCES  ad_column(ad_column_id)
     MATCH SIMPLE
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED;
 -- object recreation
-ALTER TABLE adempiere.ad_field
+ALTER TABLE  ad_field
   DROP CONSTRAINT ad_tab_field RESTRICT;  
-  ALTER TABLE adempiere.ad_field add CONSTRAINT ad_tab_field FOREIGN KEY (ad_tab_id)
-    REFERENCES adempiere.ad_tab(ad_tab_id)
+  ALTER TABLE  ad_field add CONSTRAINT ad_tab_field FOREIGN KEY (ad_tab_id)
+    REFERENCES  ad_tab(ad_tab_id)
     MATCH SIMPLE
     ON DELETE CASCADE
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED;
 		-- object recreation ---------------------------------------------
-ALTER TABLE adempiere.ad_field
+ALTER TABLE  ad_field
   DROP CONSTRAINT adfieldgroup_adfield RESTRICT;
-  ALTER TABLE adempiere.ad_field add CONSTRAINT adfieldgroup_adfield FOREIGN KEY (ad_fieldgroup_id)
-    REFERENCES adempiere.ad_fieldgroup(ad_fieldgroup_id)
+  ALTER TABLE  ad_field add CONSTRAINT adfieldgroup_adfield FOREIGN KEY (ad_fieldgroup_id)
+    REFERENCES  ad_fieldgroup(ad_fieldgroup_id)
     MATCH SIMPLE
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED;
 		-- object recreation
-ALTER TABLE adempiere.ad_field
+ALTER TABLE  ad_field
   DROP CONSTRAINT adreference_adfield RESTRICT;
-  ALTER TABLE adempiere.ad_field add CONSTRAINT adreference_adfield FOREIGN KEY (ad_reference_id)
-    REFERENCES adempiere.ad_reference(ad_reference_id)
+  ALTER TABLE  ad_field add CONSTRAINT adreference_adfield FOREIGN KEY (ad_reference_id)
+    REFERENCES  ad_reference(ad_reference_id)
     MATCH SIMPLE
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED;
 		-- object recreation
-ALTER TABLE adempiere.ad_field
+ALTER TABLE  ad_field
   DROP CONSTRAINT adreferencevalue_adfield RESTRICT;
-  ALTER TABLE adempiere.ad_field add CONSTRAINT adreferencevalue_adfield FOREIGN KEY (ad_reference_value_id)
-    REFERENCES adempiere.ad_reference(ad_reference_id)
+  ALTER TABLE  ad_field add CONSTRAINT adreferencevalue_adfield FOREIGN KEY (ad_reference_value_id)
+    REFERENCES  ad_reference(ad_reference_id)
     MATCH SIMPLE
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED;
 		-- object recreation
-ALTER TABLE adempiere.ad_field
+ALTER TABLE  ad_field
   DROP CONSTRAINT advalrule_adfield RESTRICT;
-  ALTER TABLE adempiere.ad_field add CONSTRAINT advalrule_adfield FOREIGN KEY (ad_val_rule_id)
-    REFERENCES adempiere.ad_val_rule(ad_val_rule_id)
+  ALTER TABLE  ad_field add CONSTRAINT advalrule_adfield FOREIGN KEY (ad_val_rule_id)
+    REFERENCES  ad_val_rule(ad_val_rule_id)
     MATCH SIMPLE
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED;
 		-- object recreation
-ALTER TABLE adempiere.ad_field
+ALTER TABLE  ad_field
   DROP CONSTRAINT entityt_adfield RESTRICT;
-  ALTER TABLE adempiere.ad_field add CONSTRAINT entityt_adfield FOREIGN KEY (entitytype)
-    REFERENCES adempiere.ad_entitytype(entitytype)
+  ALTER TABLE  ad_field add CONSTRAINT entityt_adfield FOREIGN KEY (entitytype)
+    REFERENCES  ad_entitytype(entitytype)
     MATCH SIMPLE
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED;
 		-- object recreation
-ALTER TABLE adempiere.ad_field
+ALTER TABLE  ad_field
   DROP CONSTRAINT fieldclient RESTRICT;
-  ALTER TABLE adempiere.ad_field add CONSTRAINT fieldclient FOREIGN KEY (ad_client_id)
-    REFERENCES adempiere.ad_client(ad_client_id)
+  ALTER TABLE  ad_field add CONSTRAINT fieldclient FOREIGN KEY (ad_client_id)
+    REFERENCES  ad_client(ad_client_id)
     MATCH SIMPLE
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED;
 		-- object recreation
-ALTER TABLE adempiere.ad_field
+ALTER TABLE  ad_field
   DROP CONSTRAINT fieldorg RESTRICT;
-  ALTER TABLE adempiere.ad_field add CONSTRAINT fieldorg FOREIGN KEY (ad_org_id)
-    REFERENCES adempiere.ad_org(ad_org_id)
+  ALTER TABLE  ad_field add CONSTRAINT fieldorg FOREIGN KEY (ad_org_id)
+    REFERENCES  ad_org(ad_org_id)
     MATCH SIMPLE
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED;
 		-- object recreation
-ALTER TABLE adempiere.ad_field
+ALTER TABLE  ad_field
   DROP CONSTRAINT includedtab_adfield RESTRICT;
-  ALTER TABLE adempiere.ad_field add CONSTRAINT includedtab_adfield FOREIGN KEY (included_tab_id)
-    REFERENCES adempiere.ad_tab(ad_tab_id)
+  ALTER TABLE  ad_field add CONSTRAINT includedtab_adfield FOREIGN KEY (included_tab_id)
+    REFERENCES  ad_tab(ad_tab_id)
     MATCH SIMPLE
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
@@ -160,9 +160,9 @@ update ad_column set fieldlength = 2000 where ad_column_id  = 211010;
 select add_missing_translations();
 delete from ad_field_trl where ad_field_id not in (select ad_field_id from ad_field);
 
-ALTER TABLE adempiere.ad_field_trl
+ALTER TABLE  ad_field_trl
   ADD CONSTRAINT ad_fieldtrl FOREIGN KEY (ad_field_id)
-    REFERENCES adempiere.ad_field(ad_field_id)
+    REFERENCES  ad_field(ad_field_id)
     MATCH FULL
     ON DELETE CASCADE
     ON UPDATE NO ACTION
@@ -170,35 +170,35 @@ ALTER TABLE adempiere.ad_field_trl
     INITIALLY DEFERRED;
     
 
-ALTER TABLE adempiere.ad_orginfo
+ALTER TABLE  ad_orginfo
   DROP CONSTRAINT ad_orginfo_lbr_isscan_check RESTRICT;
   
   /* ad_pinstance */ 
   
-ALTER TABLE adempiere.ad_pinstance
+ALTER TABLE  ad_pinstance
   ADD CONSTRAINT adprocess_adpinstance FOREIGN KEY (ad_process_id)
-    REFERENCES adempiere.ad_process(ad_process_id)
+    REFERENCES  ad_process(ad_process_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED;
 	
-ALTER TABLE adempiere.ad_pinstance
+ALTER TABLE  ad_pinstance
   ADD CONSTRAINT aduser_pinstance FOREIGN KEY (ad_user_id)
-    REFERENCES adempiere.ad_user(ad_user_id)
+    REFERENCES  ad_user(ad_user_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED;
 
-CREATE INDEX ad_pinstance_record ON adempiere.ad_pinstance
+CREATE INDEX ad_pinstance_record ON  ad_pinstance
   USING btree (ad_process_id, record_id);
   
   /* ad_pinstance_log */ 
   
-  CREATE TABLE adempiere.ad_pinstance_log_new (
+  CREATE TABLE  ad_pinstance_log_new (
   ad_pinstance_id NUMERIC(10,0) NOT NULL,
   log_id NUMERIC(10,0) NOT NULL,
   p_date TIMESTAMP WITHOUT TIME ZONE DEFAULT now(),
@@ -210,7 +210,7 @@ CREATE INDEX ad_pinstance_record ON adempiere.ad_pinstance
   record_id NUMERIC(10,0) DEFAULT NULL::numeric,
   CONSTRAINT ad_pinstance_log_new_pkey PRIMARY KEY(ad_pinstance_id, log_id),
   CONSTRAINT adtable_adpinstancelog FOREIGN KEY (ad_table_id)
-    REFERENCES adempiere.ad_table(ad_table_id)
+    REFERENCES  ad_table(ad_table_id)
     MATCH SIMPLE
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
@@ -219,18 +219,18 @@ CREATE INDEX ad_pinstance_record ON adempiere.ad_pinstance
 ) 
 WITH (oids = false);
 
-CREATE UNIQUE INDEX ad_pinstance_log_new_uu_idx ON adempiere.ad_pinstance_log_new
+CREATE UNIQUE INDEX ad_pinstance_log_new_uu_idx ON  ad_pinstance_log_new
   USING btree (ad_pinstance_log_uu COLLATE pg_catalog."default");
 
-INSERT INTO adempiere.ad_pinstance_log_new
-SELECT * FROM ONLY adempiere.ad_pinstance_log;
+INSERT INTO  ad_pinstance_log_new
+SELECT * FROM ONLY  ad_pinstance_log;
   commit;
   delete from ad_pinstance_log ;
   commit;
   
-ALTER TABLE adempiere.ad_pinstance_log
+ALTER TABLE  ad_pinstance_log
   ADD CONSTRAINT adpinstance_pilog FOREIGN KEY (ad_pinstance_id)
-    REFERENCES adempiere.ad_pinstance(ad_pinstance_id)
+    REFERENCES  ad_pinstance(ad_pinstance_id)
     MATCH FULL
     ON DELETE CASCADE
     ON UPDATE NO ACTION
@@ -238,14 +238,14 @@ ALTER TABLE adempiere.ad_pinstance_log
     INITIALLY DEFERRED;
 	commit;
 	
-	INSERT INTO adempiere.ad_pinstance_log
-SELECT * FROM ONLY adempiere.ad_pinstance_log_new;
+	INSERT INTO  ad_pinstance_log
+SELECT * FROM ONLY  ad_pinstance_log_new;
 commit;
-DROP TABLE adempiere.ad_pinstance_log_new;
+DROP TABLE  ad_pinstance_log_new;
 commit;
 /* ad_pinstance_para */ 
 
-CREATE TABLE adempiere.ad_pinstance_para_new (
+CREATE TABLE  ad_pinstance_para_new (
   ad_pinstance_id NUMERIC(10,0) NOT NULL,
   seqno NUMERIC(10,0) NOT NULL,
   parametername VARCHAR(60),
@@ -269,33 +269,33 @@ CREATE TABLE adempiere.ad_pinstance_para_new (
 ) 
 WITH (oids = false);
 
-CREATE UNIQUE INDEX ad_pinstance_para_new_uu_idx ON adempiere.ad_pinstance_para_new
+CREATE UNIQUE INDEX ad_pinstance_para_new_uu_idx ON  ad_pinstance_para_new
   USING btree (ad_pinstance_para_uu COLLATE pg_catalog."default");
 commit;
-INSERT INTO adempiere.ad_pinstance_para_new
-SELECT * FROM ONLY adempiere.ad_pinstance_para;
+INSERT INTO  ad_pinstance_para_new
+SELECT * FROM ONLY  ad_pinstance_para;
 
 delete from ad_pinstance_para;
 commit;
-ALTER TABLE adempiere.ad_pinstance_para
+ALTER TABLE  ad_pinstance_para
   ADD CONSTRAINT adpinstance_adpinstancepara FOREIGN KEY (ad_pinstance_id)
-    REFERENCES adempiere.ad_pinstance(ad_pinstance_id)
+    REFERENCES  ad_pinstance(ad_pinstance_id)
     MATCH FULL
     ON DELETE CASCADE
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED;
 	commit;
-INSERT INTO adempiere.ad_pinstance_para
-SELECT * FROM ONLY adempiere.ad_pinstance_para_new;
+INSERT INTO  ad_pinstance_para
+SELECT * FROM ONLY  ad_pinstance_para_new;
 commit;
-drop table  adempiere.ad_pinstance_para_new;	
+drop table   ad_pinstance_para_new;	
 commit;
 
 /* ad_userdef_field  */ 
-ALTER TABLE adempiere.ad_userdef_field
+ALTER TABLE  ad_userdef_field
   ADD CONSTRAINT adfield_aduserdeffield FOREIGN KEY (ad_field_id)
-    REFERENCES adempiere.ad_field(ad_field_id)
+    REFERENCES  ad_field(ad_field_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
@@ -304,9 +304,9 @@ ALTER TABLE adempiere.ad_userdef_field
 	
 /* asp_clientexception */	
 
-ALTER TABLE adempiere.asp_clientexception
+ALTER TABLE  asp_clientexception
   ADD CONSTRAINT adfield_aspclientexception FOREIGN KEY (ad_field_id)
-    REFERENCES adempiere.ad_field(ad_field_id)
+    REFERENCES  ad_field(ad_field_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
@@ -338,9 +338,9 @@ INSERT INTO t_alter_column values('c_order','lbr_transactiontype','VARCHAR(3)', 
 INSERT INTO t_alter_column values('c_orderline','lbr_tax_id','NUMERIC(10)', null,NULL);
 
 /* m_attribute */
-ALTER TABLE adempiere.m_attributeinstance
+ALTER TABLE  m_attributeinstance
   ADD CONSTRAINT mattribute_mattributeinst FOREIGN KEY (m_attribute_id)
-    REFERENCES adempiere.m_attribute(m_attribute_id)
+    REFERENCES  m_attribute(m_attribute_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
@@ -348,9 +348,9 @@ ALTER TABLE adempiere.m_attributeinstance
     INITIALLY DEFERRED;
 	
 	
-ALTER TABLE adempiere.m_attributeinstance
+ALTER TABLE  m_attributeinstance
   ADD CONSTRAINT mattributevalue_mattrinst FOREIGN KEY (m_attributevalue_id)
-    REFERENCES adempiere.m_attributevalue(m_attributevalue_id)
+    REFERENCES  m_attributevalue(m_attributevalue_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
@@ -358,9 +358,9 @@ ALTER TABLE adempiere.m_attributeinstance
     INITIALLY DEFERRED;
 	
 	
-ALTER TABLE adempiere.m_attributeinstance
+ALTER TABLE  m_attributeinstance
   ADD CONSTRAINT mattrsetinst__mattrinst FOREIGN KEY (m_attributesetinstance_id)
-    REFERENCES adempiere.m_attributesetinstance(m_attributesetinstance_id)
+    REFERENCES  m_attributesetinstance(m_attributesetinstance_id)
     MATCH FULL
     ON DELETE CASCADE
     ON UPDATE NO ACTION
@@ -370,9 +370,9 @@ ALTER TABLE adempiere.m_attributeinstance
 	/*	m_cost	*/
 	
 	
-ALTER TABLE adempiere.m_cost
+ALTER TABLE  m_cost
   ADD CONSTRAINT adclient_mcost FOREIGN KEY (ad_client_id)
-    REFERENCES adempiere.ad_client(ad_client_id)
+    REFERENCES  ad_client(ad_client_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
@@ -380,9 +380,9 @@ ALTER TABLE adempiere.m_cost
     INITIALLY DEFERRED;
 	
 	
-ALTER TABLE adempiere.m_cost
+ALTER TABLE  m_cost
   ADD CONSTRAINT adorg_m_cost FOREIGN KEY (ad_org_id)
-    REFERENCES adempiere.ad_org(ad_org_id)
+    REFERENCES  ad_org(ad_org_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
@@ -390,9 +390,9 @@ ALTER TABLE adempiere.m_cost
     INITIALLY DEFERRED;
 	
 	
-ALTER TABLE adempiere.m_cost
+ALTER TABLE  m_cost
   ADD CONSTRAINT cacctschema_mcost FOREIGN KEY (c_acctschema_id)
-    REFERENCES adempiere.c_acctschema(c_acctschema_id)
+    REFERENCES  c_acctschema(c_acctschema_id)
     MATCH FULL
     ON DELETE CASCADE
     ON UPDATE NO ACTION
@@ -400,9 +400,9 @@ ALTER TABLE adempiere.m_cost
     INITIALLY DEFERRED;
 	
 	
-ALTER TABLE adempiere.m_cost
+ALTER TABLE  m_cost
   ADD CONSTRAINT masi_mcost FOREIGN KEY (m_attributesetinstance_id)
-    REFERENCES adempiere.m_attributesetinstance(m_attributesetinstance_id)
+    REFERENCES  m_attributesetinstance(m_attributesetinstance_id)
     MATCH FULL
     ON DELETE CASCADE
     ON UPDATE NO ACTION
@@ -410,9 +410,9 @@ ALTER TABLE adempiere.m_cost
     INITIALLY DEFERRED;
 	
 	
-ALTER TABLE adempiere.m_cost
+ALTER TABLE  m_cost
   ADD CONSTRAINT mcostelement_mcost FOREIGN KEY (m_costelement_id)
-    REFERENCES adempiere.m_costelement(m_costelement_id)
+    REFERENCES  m_costelement(m_costelement_id)
     MATCH FULL
     ON DELETE CASCADE
     ON UPDATE NO ACTION
@@ -420,27 +420,27 @@ ALTER TABLE adempiere.m_cost
     INITIALLY DEFERRED;
 	
 	
-ALTER TABLE adempiere.m_cost
+ALTER TABLE  m_cost
   ADD CONSTRAINT mcosttype_mcost FOREIGN KEY (m_costtype_id)
-    REFERENCES adempiere.m_costtype(m_costtype_id)
+    REFERENCES  m_costtype(m_costtype_id)
     MATCH FULL
     ON DELETE CASCADE
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED;
 	
-	ALTER TABLE adempiere.m_cost
+	ALTER TABLE  m_cost
   ADD CONSTRAINT mproduct_mcost FOREIGN KEY (m_product_id)
-    REFERENCES adempiere.m_product(m_product_id)
+    REFERENCES  m_product(m_product_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED;
 	
-	/* CREATE TABLE adempiere.m_product_acct_new */ 
+	/* CREATE TABLE  m_product_acct_new */ 
 	
-		CREATE TABLE adempiere.m_product_acct_new (
+		CREATE TABLE  m_product_acct_new (
   m_product_id NUMERIC(10,0) NOT NULL,
   c_acctschema_id NUMERIC(10,0) NOT NULL,
   ad_client_id NUMERIC(10,0) NOT NULL,
@@ -478,7 +478,7 @@ ALTER TABLE adempiere.m_cost
   CONSTRAINT m_product_acct_new_pkey PRIMARY KEY(m_product_id, c_acctschema_id),
   CONSTRAINT m_product_acct_new_isactive_check CHECK (isactive = ANY (ARRAY['Y'::bpchar, 'N'::bpchar])),
   CONSTRAINT plandedcostclearingvc_mprodacc FOREIGN KEY (p_landedcostclearing_acct)
-    REFERENCES adempiere.c_validcombination(c_validcombination_id)
+    REFERENCES  c_validcombination(c_validcombination_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
@@ -489,16 +489,16 @@ WITH (oids = false);
 
 commit;
 
-CREATE UNIQUE INDEX m_product_acct_new_uu_idx ON adempiere.m_product_acct_new
+CREATE UNIQUE INDEX m_product_acct_new_uu_idx ON  m_product_acct_new
   USING btree (m_product_acct_uu COLLATE pg_catalog."default");
 commit;
 
-INSERT INTO adempiere.m_product_acct_new
-SELECT * FROM ONLY adempiere.m_product_acct;
+INSERT INTO  m_product_acct_new
+SELECT * FROM ONLY  m_product_acct;
 
-drop table adempiere.m_product_acct;
+drop table  m_product_acct;
 commit;
-CREATE TABLE adempiere.m_product_acct (
+CREATE TABLE  m_product_acct (
   m_product_id NUMERIC(10,0) NOT NULL,
   c_acctschema_id NUMERIC(10,0) NOT NULL,
   ad_client_id NUMERIC(10,0) NOT NULL,
@@ -536,182 +536,182 @@ CREATE TABLE adempiere.m_product_acct (
   CONSTRAINT m_product_acct_pkey PRIMARY KEY(m_product_id, c_acctschema_id),
   CONSTRAINT m_product_acct_isactive_check CHECK (isactive = ANY (ARRAY['Y'::bpchar, 'N'::bpchar])),
   CONSTRAINT cacctschema_mproductacct FOREIGN KEY (c_acctschema_id)
-    REFERENCES adempiere.c_acctschema(c_acctschema_id)
+    REFERENCES  c_acctschema(c_acctschema_id)
     MATCH FULL
     ON DELETE CASCADE
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED,
   CONSTRAINT m_product_m_product_acct FOREIGN KEY (m_product_id)
-    REFERENCES adempiere.m_product(m_product_id)
+    REFERENCES  m_product(m_product_id)
     MATCH FULL
     ON DELETE CASCADE
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED,
   CONSTRAINT paveragecostvariance_mproducta FOREIGN KEY (p_averagecostvariance_acct)
-    REFERENCES adempiere.c_validcombination(c_validcombination_id)
+    REFERENCES  c_validcombination(c_validcombination_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED,
   CONSTRAINT pburden_mproductacct FOREIGN KEY (p_burden_acct)
-    REFERENCES adempiere.c_validcombination(c_validcombination_id)
+    REFERENCES  c_validcombination(c_validcombination_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED,
   CONSTRAINT pcostadjustment_mproductacct FOREIGN KEY (p_costadjustment_acct)
-    REFERENCES adempiere.c_validcombination(c_validcombination_id)
+    REFERENCES  c_validcombination(c_validcombination_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED,
   CONSTRAINT pcostofproduction_mproductacct FOREIGN KEY (p_costofproduction_acct)
-    REFERENCES adempiere.c_validcombination(c_validcombination_id)
+    REFERENCES  c_validcombination(c_validcombination_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED,
   CONSTRAINT pfloorstock_mproductacct FOREIGN KEY (p_floorstock_acct)
-    REFERENCES adempiere.c_validcombination(c_validcombination_id)
+    REFERENCES  c_validcombination(c_validcombination_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED,
   CONSTRAINT pinventoryclearing_mproductacc FOREIGN KEY (p_inventoryclearing_acct)
-    REFERENCES adempiere.c_validcombination(c_validcombination_id)
+    REFERENCES  c_validcombination(c_validcombination_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED,
   CONSTRAINT plabor_mproductacct FOREIGN KEY (p_labor_acct)
-    REFERENCES adempiere.c_validcombination(c_validcombination_id)
+    REFERENCES  c_validcombination(c_validcombination_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED,
   CONSTRAINT plandedcostclearingvc_mprodacc FOREIGN KEY (p_landedcostclearing_acct)
-    REFERENCES adempiere.c_validcombination(c_validcombination_id)
+    REFERENCES  c_validcombination(c_validcombination_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED,
   CONSTRAINT pmethodchangevariance_mproduct FOREIGN KEY (p_methodchangevariance_acct)
-    REFERENCES adempiere.c_validcombination(c_validcombination_id)
+    REFERENCES  c_validcombination(c_validcombination_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED,
   CONSTRAINT pmixvariance_mproductacct FOREIGN KEY (p_mixvariance_acct)
-    REFERENCES adempiere.c_validcombination(c_validcombination_id)
+    REFERENCES  c_validcombination(c_validcombination_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED,
   CONSTRAINT poutsideprocessing_mproductacc FOREIGN KEY (p_outsideprocessing_acct)
-    REFERENCES adempiere.c_validcombination(c_validcombination_id)
+    REFERENCES  c_validcombination(c_validcombination_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED,
   CONSTRAINT poverhead_mproductacct FOREIGN KEY (p_overhead_acct)
-    REFERENCES adempiere.c_validcombination(c_validcombination_id)
+    REFERENCES  c_validcombination(c_validcombination_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED,
   CONSTRAINT pratevariance_mproductacct FOREIGN KEY (p_ratevariance_acct)
-    REFERENCES adempiere.c_validcombination(c_validcombination_id)
+    REFERENCES  c_validcombination(c_validcombination_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED,
   CONSTRAINT pscrap_mproductacct FOREIGN KEY (p_scrap_acct)
-    REFERENCES adempiere.c_validcombination(c_validcombination_id)
+    REFERENCES  c_validcombination(c_validcombination_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED,
   CONSTRAINT pusagevariance_mproductacct FOREIGN KEY (p_usagevariance_acct)
-    REFERENCES adempiere.c_validcombination(c_validcombination_id)
+    REFERENCES  c_validcombination(c_validcombination_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED,
   CONSTRAINT pwip_mproductacct FOREIGN KEY (p_wip_acct)
-    REFERENCES adempiere.c_validcombination(c_validcombination_id)
+    REFERENCES  c_validcombination(c_validcombination_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED,
   CONSTRAINT vc_passet_mproduct FOREIGN KEY (p_asset_acct)
-    REFERENCES adempiere.c_validcombination(c_validcombination_id)
+    REFERENCES  c_validcombination(c_validcombination_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED,
   CONSTRAINT vc_pcogs_mproduct FOREIGN KEY (p_cogs_acct)
-    REFERENCES adempiere.c_validcombination(c_validcombination_id)
+    REFERENCES  c_validcombination(c_validcombination_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED,
   CONSTRAINT vc_pexpense_mproduct FOREIGN KEY (p_expense_acct)
-    REFERENCES adempiere.c_validcombination(c_validcombination_id)
+    REFERENCES  c_validcombination(c_validcombination_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED,
   CONSTRAINT vc_pinvoicepv_mproduct FOREIGN KEY (p_invoicepricevariance_acct)
-    REFERENCES adempiere.c_validcombination(c_validcombination_id)
+    REFERENCES  c_validcombination(c_validcombination_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED,
   CONSTRAINT vc_ppurchasepv_mproduct FOREIGN KEY (p_purchasepricevariance_acct)
-    REFERENCES adempiere.c_validcombination(c_validcombination_id)
+    REFERENCES  c_validcombination(c_validcombination_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED,
   CONSTRAINT vc_prevenue_mproduct FOREIGN KEY (p_revenue_acct)
-    REFERENCES adempiere.c_validcombination(c_validcombination_id)
+    REFERENCES  c_validcombination(c_validcombination_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED,
   CONSTRAINT vc_ptdiscountgrant_mproduct FOREIGN KEY (p_tradediscountgrant_acct)
-    REFERENCES adempiere.c_validcombination(c_validcombination_id)
+    REFERENCES  c_validcombination(c_validcombination_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED,
   CONSTRAINT vc_ptdiscountrec_mproduct FOREIGN KEY (p_tradediscountrec_acct)
-    REFERENCES adempiere.c_validcombination(c_validcombination_id)
+    REFERENCES  c_validcombination(c_validcombination_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
@@ -720,22 +720,22 @@ CREATE TABLE adempiere.m_product_acct (
 ) 
 WITH (oids = false);
 commit;
-CREATE UNIQUE INDEX m_product_acct_uu_idx ON adempiere.m_product_acct
+CREATE UNIQUE INDEX m_product_acct_uu_idx ON  m_product_acct
   USING btree (m_product_acct_uu COLLATE pg_catalog."default");
   commit;
-INSERT INTO adempiere.m_product_acct
-SELECT * FROM ONLY adempiere.m_product_acct_new;
+INSERT INTO  m_product_acct
+SELECT * FROM ONLY  m_product_acct_new;
 
-drop table adempiere.m_product_acct_new;
+drop table  m_product_acct_new;
 commit;
 
 
 /* t_aging */ 
 delete from t_aging;
 
-ALTER TABLE adempiere.t_aging
+ALTER TABLE  t_aging
   ADD CONSTRAINT adpinstance_taging FOREIGN KEY (ad_pinstance_id)
-    REFERENCES adempiere.ad_pinstance(ad_pinstance_id)
+    REFERENCES  ad_pinstance(ad_pinstance_id)
     MATCH FULL
     ON DELETE CASCADE
     ON UPDATE NO ACTION
@@ -747,9 +747,9 @@ ALTER TABLE adempiere.t_aging
 	
 	delete from t_replenish;
 
-ALTER TABLE adempiere.t_replenish
+ALTER TABLE  t_replenish
   ADD CONSTRAINT adpinstance_treplenish FOREIGN KEY (ad_pinstance_id)
-    REFERENCES adempiere.ad_pinstance(ad_pinstance_id)
+    REFERENCES  ad_pinstance(ad_pinstance_id)
     MATCH FULL
     ON DELETE CASCADE
     ON UPDATE NO ACTION
@@ -762,9 +762,9 @@ ALTER TABLE adempiere.t_replenish
 	
 	delete from t_report;
 
-ALTER TABLE adempiere.t_report
+ALTER TABLE  t_report
   ADD CONSTRAINT adpinstance_treport FOREIGN KEY (ad_pinstance_id)
-    REFERENCES adempiere.ad_pinstance(ad_pinstance_id)
+    REFERENCES  ad_pinstance(ad_pinstance_id)
     MATCH FULL
     ON DELETE CASCADE
     ON UPDATE NO ACTION
@@ -774,9 +774,9 @@ ALTER TABLE adempiere.t_report
 	/* t_reportstatement */ 
 	delete from t_reportstatement;
 
-ALTER TABLE adempiere.t_reportstatement
+ALTER TABLE  t_reportstatement
   ADD CONSTRAINT adpinstance_treportstatement FOREIGN KEY (ad_pinstance_id)
-    REFERENCES adempiere.ad_pinstance(ad_pinstance_id)
+    REFERENCES  ad_pinstance(ad_pinstance_id)
     MATCH FULL
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
@@ -787,9 +787,9 @@ ALTER TABLE adempiere.t_reportstatement
 	
 	delete from t_spool;
 
-ALTER TABLE adempiere.t_spool
+ALTER TABLE  t_spool
   ADD CONSTRAINT adpinstance_tspool FOREIGN KEY (ad_pinstance_id)
-    REFERENCES adempiere.ad_pinstance(ad_pinstance_id)
+    REFERENCES  ad_pinstance(ad_pinstance_id)
     MATCH FULL
     ON DELETE CASCADE
     ON UPDATE NO ACTION
@@ -799,9 +799,9 @@ ALTER TABLE adempiere.t_spool
 	/* t_transaction */ 
 	
 	delete from t_transaction;
-ALTER TABLE adempiere.t_transaction
+ALTER TABLE  t_transaction
   ADD CONSTRAINT adpinstance_ttransaction FOREIGN KEY (ad_pinstance_id)
-    REFERENCES adempiere.ad_pinstance(ad_pinstance_id)
+    REFERENCES  ad_pinstance(ad_pinstance_id)
     MATCH FULL
     ON DELETE CASCADE
     ON UPDATE NO ACTION
@@ -811,15 +811,97 @@ ALTER TABLE adempiere.t_transaction
 	/* t_trialbalance */ 
 	
 	delete from t_trialbalance;
-ALTER TABLE adempiere.t_trialbalance
+ALTER TABLE  t_trialbalance
   ADD CONSTRAINT ad_pinstance_t_trialbalance FOREIGN KEY (ad_pinstance_id)
-    REFERENCES adempiere.ad_pinstance(ad_pinstance_id)
+    REFERENCES  ad_pinstance(ad_pinstance_id)
     MATCH FULL
     ON DELETE CASCADE
     ON UPDATE NO ACTION
     DEFERRABLE
     INITIALLY DEFERRED;
 
+/* remove os pkey para as novas tabelas que serão criadas pelos scripts LBR */ 
+		
+ALTER TABLE  lbr_ncm
+  DROP CONSTRAINT lbr_ncm_pkey RESTRICT;
+  commit;  
+ALTER TABLE  lbr_legalmessage
+  DROP CONSTRAINT lbr_legalmessage_key RESTRICT;
+  commit;  
+ALTER TABLE  lbr_taxgroup
+  DROP CONSTRAINT lbr_taxgroup_key RESTRICT;
+  commit;  
+ALTER TABLE  lbr_fiscalgroup_product
+  DROP CONSTRAINT lbr_fiscalgroup_product_key RESTRICT;
+  commit;
+ALTER TABLE  lbr_fiscalgroup_bpartner
+  DROP CONSTRAINT lbr_fiscalgroup_bpartner_key RESTRICT;
+  commit;  
+ALTER TABLE  lbr_productcategory
+  DROP CONSTRAINT lbr_productcategory_key RESTRICT;
+  commit;
+ALTER TABLE  lbr_bpartnercategory
+  DROP CONSTRAINT lbr_bpartnercategory_key RESTRICT;
+  commit;  
+ALTER TABLE  lbr_taxname
+  DROP CONSTRAINT lbr_taxname_key RESTRICT;
+  commit;   
+ALTER TABLE  lbr_taxformula
+  DROP CONSTRAINT lbr_taxformula_key RESTRICT;
+  commit;  
+ALTER TABLE  lbr_tax
+  DROP CONSTRAINT lbr_tax_key RESTRICT;
+  commit;   
+ALTER TABLE  lbr_taxline
+  DROP CONSTRAINT lbr_taxline_key RESTRICT;
+  commit;    
+ALTER TABLE  lbr_icmsmatrix
+  DROP CONSTRAINT lbr_icmsmatrix_key RESTRICT;
+  commit;
+ALTER TABLE  lbr_issmatrix
+  DROP CONSTRAINT lbr_issmatrix_key RESTRICT;
+  commit;
+ALTER TABLE  lbr_taxconfiguration
+  DROP CONSTRAINT lbr_taxconfiguration_key RESTRICT;
+  commit;  
+ALTER TABLE  lbr_taxconfig_bpartner
+  DROP CONSTRAINT lbr_taxconfig_bpartner_key RESTRICT;
+  commit;  
+ALTER TABLE  lbr_taxconfig_bpgroup
+  DROP CONSTRAINT lbr_taxconfig_bpgroup_key RESTRICT;
+  commit;    
+ALTER TABLE  lbr_taxconfig_region
+  DROP CONSTRAINT lbr_taxconfig_region_key RESTRICT;
+  commit;
+ALTER TABLE  lbr_taxconfig_product
+  DROP CONSTRAINT lbr_taxconfig_product_key RESTRICT;
+  commit;
+ALTER TABLE  lbr_taxconfig_productgroup
+  DROP CONSTRAINT lbr_taxconfig_productgroup_key RESTRICT;
+  commit;
+ALTER TABLE  lbr_cfop
+  DROP CONSTRAINT lbr_cfop_key RESTRICT;
+  commit;
+ALTER TABLE  lbr_cfopline
+  DROP CONSTRAINT lbr_cfopline_key RESTRICT;
+  commit;
+ALTER TABLE  lbr_notafiscal
+  DROP CONSTRAINT lbr_notafiscal_key RESTRICT;
+  commit;
+ALTER TABLE  lbr_notafiscalline
+  DROP CONSTRAINT lbr_notafiscalline_key RESTRICT;
+  commit;
+ALTER TABLE  lbr_digitalcertificate
+  DROP CONSTRAINT lbr_digitalcertificate_key RESTRICT;
+  commit;
+ALTER TABLE  lbr_nfewebservice
+  DROP CONSTRAINT lbr_nfewebservice_key RESTRICT;
+  commit;
+ALTER TABLE  lbr_boleto
+  DROP CONSTRAINT lbr_boleto_key RESTRICT;
+  commit;
+/* fim remocao pkey */ 
+  
 /* alterada todos os nomes de tabelas LBR para lbr_nometabela_old para manter compatibilidade
 com a nova versão do IDempiereLBR */ 
 alter table LBR_ApuracaoICMS rename to LBR_ApuracaoICMS_old;
@@ -944,12 +1026,12 @@ delete from ad_attachment a where a.ad_table_id in
 
 -- object recreation
 -- remove a constrain caso exista e cria uma nova com ON DELETE CASCADE para deletar as traducoes tambem
-ALTER TABLE adempiere.ad_printformat_trl
+ALTER TABLE  ad_printformat_trl
   DROP CONSTRAINT adprintformat_trl RESTRICT;
 commit;
-ALTER TABLE adempiere.ad_printformat_trl
+ALTER TABLE  ad_printformat_trl
   ADD CONSTRAINT adprintformat_trl FOREIGN KEY (ad_printformat_id)
-    REFERENCES adempiere.ad_printformat(ad_printformat_id)
+    REFERENCES  ad_printformat(ad_printformat_id)
     MATCH FULL
     ON DELETE CASCADE
     ON UPDATE NO ACTION
@@ -996,12 +1078,12 @@ delete from ad_process where  entitytype = 'LBRA'; -- deleta processos lbr
 delete from ad_rule where  entitytype = 'LBRA'; -- deleta rules lbr
 -- object recreation
 -- dropa e recria constrain caso exista, cria ON DELETE CASCADE para traducoes de formularios.
-ALTER TABLE adempiere.ad_form_trl
+ALTER TABLE  ad_form_trl
   DROP CONSTRAINT adform_adformtrl RESTRICT;
 commit;
-ALTER TABLE adempiere.ad_form_trl
+ALTER TABLE  ad_form_trl
   ADD CONSTRAINT adform_adformtrl FOREIGN KEY (ad_form_id)
-    REFERENCES adempiere.ad_form(ad_form_id)
+    REFERENCES  ad_form(ad_form_id)
     MATCH FULL
     ON DELETE CASCADE
     ON UPDATE NO ACTION
@@ -1014,12 +1096,12 @@ delete from ad_element where ad_element_id = 2000171; -- delete elemento que sob
 
 -- object recreation
 -- alterada constrain adfieldgroup_trl para ON DELETE CASCADE
-ALTER TABLE adempiere.ad_fieldgroup_trl
+ALTER TABLE  ad_fieldgroup_trl
   DROP CONSTRAINT adfieldgroup_trl RESTRICT;
 commit;
-ALTER TABLE adempiere.ad_fieldgroup_trl
+ALTER TABLE  ad_fieldgroup_trl
   ADD CONSTRAINT adfieldgroup_trl FOREIGN KEY (ad_fieldgroup_id)
-    REFERENCES adempiere.ad_fieldgroup(ad_fieldgroup_id)
+    REFERENCES  ad_fieldgroup(ad_fieldgroup_id)
     MATCH FULL
     ON DELETE CASCADE
     ON UPDATE NO ACTION
@@ -1033,3 +1115,5 @@ delete from ad_sysconfig where entitytype = 'LBRA';
 delete from ad_val_rule where entitytype = 'LBRA';
 delete from ad_entitytype where ad_entitytype.entitytype = 'LBRA';
 DELETE FROM AD_REFERENCE WHERE AD_REFERENCE_ID = 1120031;
+
+delete from ad_sequence e  where e.name like '%LBR%';
