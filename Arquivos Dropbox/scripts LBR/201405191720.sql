@@ -154,12 +154,10 @@ INSERT INTO AD_Element (ColumnName,AD_Element_ID,Name,Description,PrintName,AD_E
 ;
 
 -- May 21, 2014 10:11:03 AM BRT
-INSERT INTO AD_Column (SeqNoSelection,IsSyncDatabase,Version,AD_Column_ID,IsMandatory,IsTranslated,IsIdentifier,SeqNo,IsParent,FieldLength,IsSelectionColumn,IsKey,IsAutocomplete,IsAllowLogging,AD_Column_UU,IsUpdateable,ColumnName,Name,IsAllowCopy,Updated,CreatedBy,IsActive,Created,UpdatedBy,IsToolbarButton,IsAlwaysUpdateable,AD_Client_ID,IsEncrypted,IsSecure,FKConstraintType,AD_Element_ID,AD_Reference_ID,AD_Reference_Value_ID,AD_Table_ID,AD_Org_ID,EntityType) VALUES (0,'N',0,1000824,'N','N','N',0,'N',2,'N','N','N','Y','9233821c-b3e6-475e-8d2a-bdd43b193b11','Y','LBR_NFBModel','NFB (DocType) Model','Y',TO_TIMESTAMP('2014-05-21 10:11:03','YYYY-MM-DD HH24:MI:SS'),0,'Y',TO_TIMESTAMP('2014-05-21 10:11:03','YYYY-MM-DD HH24:MI:SS'),0,'N','N',0,'N','N','N',1000233,17,1000050,217,0,'LBR')
-;
+INSERT INTO AD_Column (SeqNoSelection,IsSyncDatabase,Version,AD_Column_ID,IsMandatory,IsTranslated,IsIdentifier,SeqNo,IsParent,FieldLength,IsSelectionColumn,IsKey,IsAutocomplete,IsAllowLogging,AD_Column_UU,IsUpdateable,ColumnName,Name,IsAllowCopy,Updated,CreatedBy,IsActive,Created,UpdatedBy,IsToolbarButton,IsAlwaysUpdateable,AD_Client_ID,IsEncrypted,IsSecure,FKConstraintType,AD_Element_ID,AD_Reference_ID,AD_Reference_Value_ID,AD_Table_ID,AD_Org_ID,EntityType) VALUES (0,'N',0,1000824,'N','N','N',0,'N',2,'N','N','N','Y','9233821c-b3e6-475e-8d2a-bdd43b193b11','Y','LBR_NFBModel','NFB (DocType) Model','Y',TO_TIMESTAMP('2014-05-21 10:11:03','YYYY-MM-DD HH24:MI:SS'),0,'Y',TO_TIMESTAMP('2014-05-21 10:11:03','YYYY-MM-DD HH24:MI:SS'),0,'N','N',0,'N','N','N',1000233,17,1000050,217,0,'LBR');
 
 -- May 21, 2014 10:11:07 AM BRT
-ALTER TABLE c_doctype
-  ALTER COLUMN lbr_nfmodel TYPE VARCHAR(2) ;
+ALTER TABLE C_DocType ADD COLUMN LBR_NFBModel VARCHAR(2) DEFAULT NULL;
 
 -- May 21, 2014 10:12:25 AM BRT
 INSERT INTO AD_Column (SeqNoSelection,IsSyncDatabase,Version,AD_Column_ID,IsMandatory,IsTranslated,IsIdentifier,SeqNo,IsParent,FieldLength,IsSelectionColumn,IsKey,IsAutocomplete,IsAllowLogging,AD_Column_UU,IsUpdateable,ColumnName,Name,IsAllowCopy,Updated,CreatedBy,IsActive,Created,UpdatedBy,IsToolbarButton,IsAlwaysUpdateable,AD_Client_ID,IsEncrypted,IsSecure,FKConstraintType,AD_Element_ID,AD_Reference_ID,AD_Table_ID,AD_Org_ID,EntityType) VALUES (0,'N',0,1000825,'N','N','N',0,'N',3,'N','N','N','Y','25eb84ca-b009-405b-b2c9-68dae563f623','Y','LBR_NFeSerie','NF Serie','Y',TO_TIMESTAMP('2014-05-21 10:12:25','YYYY-MM-DD HH24:MI:SS'),0,'Y',TO_TIMESTAMP('2014-05-21 10:12:25','YYYY-MM-DD HH24:MI:SS'),0,'N','N',0,'N','N','N',1000174,10,217,0,'LBR')

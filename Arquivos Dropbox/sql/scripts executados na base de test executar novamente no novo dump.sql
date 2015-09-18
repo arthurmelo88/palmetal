@@ -1115,5 +1115,19 @@ delete from ad_sysconfig where entitytype = 'LBRA';
 delete from ad_val_rule where entitytype = 'LBRA';
 delete from ad_entitytype where ad_entitytype.entitytype = 'LBRA';
 DELETE FROM AD_REFERENCE WHERE AD_REFERENCE_ID = 1120031;
-
 delete from ad_sequence e  where e.name like '%LBR%';
+
+update ad_column set callout = 'org.compiere.model.CalloutOrder.product' where ad_column_id = 2221;
+update ad_column set callout = 'org.compiere.model.CalloutOrder.bPartner' where ad_column_id = 2762;
+update ad_column set callout = 'org.compiere.model.CalloutInvoice.bPartner' where ad_column_id =3499;
+update ad_column set callout = 'org.compiere.model.CalloutInvoice.product' where ad_column_id = 3840;
+update ad_process set classname = 'org.idempierelbr.nfe.process.GenerateDanfe' where ad_process_id = 2000040;
+update ad_process set classname = 'br.com.palmetal.core.process.StatusRemessa' where ad_process_id = 2000003;
+update ad_process set classname = 'br.com.palmetal.core.process.AvisaClienteColetado' where ad_process_id = 2000032;
+update ad_process set classname = 'br.com.palmetal.core.process.AvisaClienteAutorizado' where ad_process_id = 2000031;
+update ad_process set classname = 'br.com.palmetal.core.process.StatusFabricacao' where ad_process_id = 2000001;
+update ad_process set classname = 'br.com.palmetal.core.process.EnviaEmailNF' where ad_process_id = 2000047;
+update ad_process set classname = 'br.com.palmetal.core.process.StatusFaturamento' where ad_process_id = 2000002;
+update ad_process set classname = 'br.com.palmetal.core.process.DesalocaOS' where ad_process_id = 2000007;
+update ad_process set classname = 'br.com.palmetal.core.process.StatusPago' where ad_process_id = 2000005;
+update ad_process set classname = 'br.com.palmetal.core.process.StatusPagamento' where ad_process_id = 2000004;
